@@ -17,7 +17,7 @@ router.get("/posts", getAllPosts);
 // Protected route to get posts for the currently logged-in user
 router.get("/posts/me", authenticate, fetchUserPosts);
 // Protected route to get a single post by ID
-router.get("/posts/:id", authenticate, getSinglePost);
+router.get("/posts/:id", getSinglePost);
 
 
 // Protected route to create a new post
