@@ -11,22 +11,14 @@ const { canModifyPost, authenticate } = require("../middlewares/auth.js");
 
 const router = require("express").Router();
 
-// Public route to get all posts
+// Public routes
 router.get("/posts", getAllPosts);
-
-// Protected route to get posts for the currently logged-in user
-router.get("/posts/me", authenticate, fetchUserPosts);
-// Protected route to get a single post by ID
 router.get("/posts/:id", getSinglePost);
 
-
-// Protected route to create a new post
+// Protected routes
+router.get("/posts/me", authenticate, fetchUserPosts);
 router.post("/posts", authenticate, CreatePost);
-
-// Protected route to update an existing post
-router.put("/posts/:id", authenticate, canModifyPost, updatePost);
-
-// Protected route to delete an existing post
+router.put("/posts/:id", canModifyPost, updatePost);
 router.delete("/posts/:id", authenticate, canModifyPost, deletePost);
 
 module.exports = router;
