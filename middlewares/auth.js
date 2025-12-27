@@ -142,8 +142,9 @@ const authenticate = (req, res, next) => {
     // Normalize to always use `id`
     req.user = {
       id: decoded.id || decoded._id,
-      role: decoded.role || "user",
+      role: decoded.role
     };
+
 
     next();
   } catch (err) {
