@@ -11,15 +11,18 @@
 
   const router = require("express").Router();
 
-// 🔐 PROTECTED ROUTES FIRST
+router.get("/posts", getAllPosts);
+
+// 🔥 STATIC route FIRST
 router.get("/posts/me", authenticate, fetchUserPosts);
+
+// 🔥 DYNAMIC route AFTER
+router.get("/posts/:id", getSinglePost);
+
 router.post("/posts", authenticate, CreatePost);
 router.put("/posts/:id", authenticate, updatePost);
 router.delete("/posts/:id", authenticate, deletePost);
 
-// 🔓 PUBLIC ROUTES LAST
-router.get("/posts", getAllPosts);
-router.get("/posts/:id", getSinglePost);
 
 
 
