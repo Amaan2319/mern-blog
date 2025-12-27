@@ -1,24 +1,23 @@
-// Import necessary modules and controllers
-const {
-  getAllPosts,
-  getSinglePost,
-  CreatePost,
-  deletePost,
-  updatePost,
-  fetchUserPosts, 
-} = require("../controllers/PostController.js");
-const { canModifyPost, authenticate } = require("../middlewares/auth.js");
+  // Import necessary modules and controllers
+  const {
+    getAllPosts,
+    getSinglePost,
+    CreatePost,
+    deletePost,
+    updatePost,
+    fetchUserPosts, 
+  } = require("../controllers/PostController.js");
+  const { canModifyPost, authenticate } = require("../middlewares/auth.js");
 
-const router = require("express").Router();
+  const router = require("express").Router();
 
-// Public routes
-router.get("/posts", getAllPosts);
+router.get("/posts", getAllPosts); // public feed
 router.get("/posts/:id", getSinglePost);
 
-// Protected routes
 router.get("/posts/me", authenticate, fetchUserPosts);
 router.post("/posts", authenticate, CreatePost);
-router.put("/posts/:id", canModifyPost, updatePost);
-router.delete("/posts/:id", authenticate, canModifyPost, deletePost);
+router.put("/posts/:id", authenticate, updatePost);
+router.delete("/posts/:id", authenticate, deletePost);
 
-module.exports = router;
+
+  module.exports = router;
